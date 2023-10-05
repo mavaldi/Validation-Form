@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Registrasi Mahasiswa</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h2>Form Registrasi Mahasiswa</h2>
+  <form>
+    <label for="nama">Nama Mahasiswa:</label>
+    <input type="text" id="nama" oninput="suggestNames()" placeholder="Masukkan nama..." required>
+    <ul id="suggestions"></ul>
+
+    <label for="nim">NIM:</label>
+    <input type="text" id="nim" placeholder="Masukkan NIM..." required>
+
+    <label for="jurusan">Jurusan:</label>
+    <select id="jurusan">
+      <option value="">Pilih Jurusan</option>
+      <option value="TEKNIK ELEKTRO">TEKNIK ELEKTRO</option>
+      <option value="TEKNIK BIOMEDIK">TEKNIK BIOMEDIK</option>
+      <option value="REKAYASA PERANGKAT LUNAK">REKAYASA PERANGKAT LUNAK</option>
+      <option value="TEKNIK INFORMATIKA">TEKNIK INFORMATIKA</option>
+      <option value="TEKNOLOGI INFORMASI">TEKNOLOGI INFORMASI</option>
+      <option value="REKAYASA KECERDASAN ARTIFISIAL">REKAYASA KECERDASAN ARTIFISIAL</option>
+      <option value="SISTEM INFORMASI">SISTEM INFORMASI</option>
+      <option value="TEKNIK TELEKOMUNIKASI">TEKNIK TELEKOMUNIKASI</option>
+      <option value="TEKNIK KOMPUTER">TEKNIK KOMPUTER</option>
+      <option value="INOVASI DIGITAL">INOVASI DIGITAL</option>
+    </select>
+
+    <label for="dosen">Dosen:</label>
+    <input type="text" id="dosen" placeholder="Masukkan nama dosen..." required>
+    
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const names = ['John Terry', 
+                   'Jane Dow', 
+                   'John Dow', 
+                   'Michael Jacker', 
+                   'Jessica Mel', 
+                   'Robert Lewandowski', 
+                   'Anna McLeir', 
+                   'Daniel Liebert', 
+                   'Emily Fly'];
+
+    function suggestNames() {
+    const input = document.getElementById('nama').value.toLowerCase();
+    const suggestions = document.getElementById('suggestions');
+    suggestions.innerHTML = '';
+
+    if (input.trim() === '') {
+        return; // Tidak menampilkan rekomendasi jika input kosong atau hanya berisi spasi
+    }
+
+    for (const name of names) {
+        const lowerCaseName = name.toLowerCase();
+        if (lowerCaseName.startsWith(input)) {
+        const li = document.createElement('li');
+        li.textContent = name;
+        li.addEventListener('click', () => {
+            document.getElementById('nama').value = name;
+            suggestions.innerHTML = '';
+        });
+        suggestions.appendChild(li);
+        }
+    }
+    }
+
+  </script>
+</body>
+</html>
